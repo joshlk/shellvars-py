@@ -5,6 +5,8 @@ Read environment variables defined in a shell script into Python.
 This library uses the shell to get variable values, and handles 
 multiline variables.
 
+Python 2 and 3 compatible.
+
 
 # Usage
 
