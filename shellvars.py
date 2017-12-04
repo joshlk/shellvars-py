@@ -38,7 +38,7 @@ def list_vars(script_path, ignore=IGNORE_DEFAULT):
                  """{ if (!system("[ -n \\"${" $1 "}\\" ]")) print $1 }'""")
         cmd = "env -i bash".split()
 
-        p = Popen(cmd, stdout=PIPE, stdin=PIPE, stderr=PIPE)
+        p = Popen(cmd, stdout=PIPE, stdin=PIPE, stderr=PIPE, encoding='utf8')
         stdout_data, stderr_data = p.communicate(input=input)
         if stderr_data:
             raise ShellScriptException(script_path, stderr_data)
@@ -81,7 +81,7 @@ def get_var(script_path, var):
     """
     if path.isfile(script_path):
         input = '. "%s"; echo -n "$%s"\n'% (script_path, var)
-        pipe = Popen(["bash"],  stdout=PIPE, stdin=PIPE, stderr=PIPE)
+        pipe = Popen(["bash"],  stdout=PIPE, stdin=PIPE, stderr=PIPE, encoding='utf8')
         stdout_data, stderr_data = pipe.communicate(input=input)
         if stderr_data:
             raise ShellScriptException(script_path, stderr_data)
